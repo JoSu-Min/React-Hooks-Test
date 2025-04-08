@@ -7,9 +7,9 @@ function ListCom({ data, loading, error, selectedMember, onSelect, onDelete, onE
 
     useEffect(() => {
         if (selectedMember) {
-            setEditedMember({ ...selectedMember }); // 선택된 회원 정보로 초기화
+            setEditedMember({ ...selectedMember });
         }
-    }, [selectedMember]); // selectedMember가 변경될 때마다 업데이트
+    }, [selectedMember]); 
 
     const handleEditChange = (e) => {
         const { name, value } = e.target;
@@ -17,29 +17,22 @@ function ListCom({ data, loading, error, selectedMember, onSelect, onDelete, onE
     };
 
     const handleEditSubmit = () => {
-        onEdit(editedMember); // 수정된 정보를 부모 컴포넌트로 전달
-        setEditMode(false); // 수정 모드 종료
-        setSelectedMember(null); // 선택된 회원 정보 초기화
+        onEdit(editedMember); 
+        setEditMode(false);
+        setSelectedMember(null);
     };
 
     return (<>
-        {loading ? <h3>Loading . . . </h3> :
-            error ? <h3>{error}</h3> :
-                selectedMember ? (
+        {loading ? <h3>Loading . . . </h3> :error ? <h3>{error}</h3> :selectedMember ? (
                     <div>
                         <h3>회원 상세 정보</h3>
                         {editMode ? (
                             <div>
-                                <input
-                                    type="text"
-                                    name="name"
-                                    value={editedMember.name}
-                                    onChange={handleEditChange}
+                                <input type="text" name="name" value={editedMember.name}
+                                       onChange={handleEditChange}
                                 /><br/>
                                 <input
-                                    type="text"
-                                    name="addr"
-                                    value={editedMember.addr}
+                                    type="text" name="addr" value={editedMember.addr}
                                     onChange={handleEditChange}
                                 /><br/>
                                 <button onClick={handleEditSubmit}>수정 완료</button> &nbsp;
@@ -54,10 +47,8 @@ function ListCom({ data, loading, error, selectedMember, onSelect, onDelete, onE
                                     <>
                                         <button onClick={() => onDelete(selectedMember.id)}>삭제</button>
                                         <button onClick={() => setEditMode(true)}>수정</button>
-                                    </>
-                                )}
-                            </>
-                        )}
+                                    </>)}
+                            </> )}
                     </div>
                 ) : (
                     <table border="1">
